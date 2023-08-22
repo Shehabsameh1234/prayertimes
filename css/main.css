@@ -1,0 +1,194 @@
+/* global */
+* {
+    text-transform: capitalize;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: rgba(0, 0, 0, 0.336);
+    --second-color: teal;
+}
+
+.container {
+    width: 85%;
+}
+
+
+
+
+
+/* global */
+
+
+/* main class */
+.bg-img {
+    background-image: url(../img/prayerImg.webp);
+    width: 100%;
+   height: 100vh;
+    background-position: center;
+    background-size: cover;
+    color: white; 
+}
+
+/* main class */
+
+
+/* header city and date */
+.city-date-main {
+    text-align: center;
+    padding-top: 20px;
+
+}
+
+.city-date-main::after {
+    content: "";
+    display: block;
+    border: solid 2px white;
+    width: 220px;
+    margin: auto;
+}
+
+.city-date-main>h1 {
+    font-size: 70px;
+
+}
+
+.city-date-main>h1+h3 {
+    font-size: 18px;
+
+}
+
+/* header city and date */
+
+
+
+/* current time */
+.city-date-main+p {
+    text-align: center;
+    margin-top: 50px;
+    background-color: var(--main-color);
+    font-size: 40px;
+    padding: 5px 0;
+}
+
+/* current time */
+
+
+/* next prayer */
+.next-remaining-prayertime-text {
+    background-color: var(--main-color);
+    text-align: center;
+    width: 100%;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    padding: 10px;
+}
+
+.next-remaining-prayertime-name {
+    background-color: var(--second-color);
+    text-align: center;
+    width: 100%;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 10px;
+}
+
+/* next prayer */
+
+
+/* prayer-cards */
+
+#prayer-cards img {
+    width: 20%;
+}
+#prayer-cards div div div  {
+    background-color: var(--main-color);
+    border-radius: 10%;
+    padding: 20PX 0;
+    border: solid 2px var(--second-color);
+    cursor: pointer;
+    transition: all .5s;
+}
+.active::before {
+    content: "Next prayer";
+    display: inline-block;
+    background-color: var(--main-color);
+    padding: 2px 8px;
+    border: solid var(--second-color) 1px;
+border-radius: 10px;
+    margin-bottom: 15px;
+    cursor: pointer; 
+   margin-right: 18px;
+}
+.before::before {
+    content: "Next prayer";
+    visibility: hidden;
+    display: inline-block;
+    padding: 2px 8px;
+    border: solid var(--second-color) 1px;
+    margin-bottom: 15px;
+    cursor: pointer; 
+}
+#prayer-cards div div div:hover {
+    background-color: var(--second-color);
+    transform: translateY(-5%);
+}
+
+/* prayer-cards */
+
+
+/* form */
+form{
+    margin-top: 100px;
+
+   
+}
+form input{
+   width: 40% !important;
+}
+.form-control {
+    color: white;
+    background-color: var(--main-color);
+    border: 1px solid var(--second-color);
+}
+.form-control:focus {
+    color: white;
+    background-color: var(--main-color);
+    border-color: var(--second-color);
+    box-shadow: 0 0 0 .25rem transparent
+}
+.btn-outline-danger {
+    border-color: var(--second-color)
+}
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: var(--second-color);
+    border-color: var(--second-color)
+}
+.btn-outline-danger:focus {
+    box-shadow: 0 0 0 0rem var(--second-color)
+}
+::placeholder{
+    color: rgba(255, 255, 255, 0.637) !important;
+}
+/* form */
+
+
+@media (min-width: 0px) and (max-width: 760px) {
+    .container {
+        width: 97% !important;
+    }
+    form input{
+        width: 100% !important;
+     }
+  
+}
+
+@media (min-width: 600px) and (max-width: 1300px) {
+    .container {
+        width: 90% !important;
+    }
+    
+}

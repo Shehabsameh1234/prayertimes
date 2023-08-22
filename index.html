@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer times</title>
+    <link rel="stylesheet" href="css/css bootstrap/bootstrap.min.css">
+    <script src="js/js bootstarp/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+
+
+
+
+    <!-- main section -->
+    <section class="bg-img">
+
+        <!-- header city and date -->
+        <div class="city-date-main">
+            <h1 id="city-main">cairo</h1>
+            <h3 id="date-today">tuesday 22/08/2023</h3>
+        </div>
+        <!-- header city and date -->
+
+
+        <!-- current time -->
+        <p class="container  rounded">10:20:30 AM</p>
+        <!-- current time -->
+
+
+        <!-- next prayer -->
+        <div class="next-remaining-prayertime  d-flex justify-content-around container">
+            <p class="next-remaining-prayertime-text" id="next-prayer-text">next prayer</p>
+            <p class="next-remaining-prayertime-name" id="next-prayer-name">fajr</p>
+        </div>
+        <div class="next-remaining-prayertime  d-flex justify-content-around container">
+            <p class="next-remaining-prayertime-text" id="remainig-time-text"> remaining time</p>
+            <p class="next-remaining-prayertime-name" id="remaining-time">1:20:30</p>
+        </div>
+        <!-- next prayer -->
+
+        <!-- prayer cards -->
+        <div id="prayer-cards" class="container">
+            <div class="row g-0 mt-5 ms-2 justify-content-around text-center">
+                <div class="col-lg-2  before col-md-3 col-6">
+                    <div class="me-3">
+                        <img src="img/sunrise1.png" alt="sunrise-fajr">
+                        <h4 class="my-3">fajr</h4>
+                        <p id="fajr-time">4:53 AM</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 before col-md-3 col-6">
+                    <div class="me-3 ">
+                        <img src="img/sunrise.png" alt="sunrise-fajr">
+                        <h4 class="my-3">sunrise</h4>
+                        <p id="fajr-time">4:53 AM</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 active  col-md-3 my-2 my-md-0 col-6">
+                    <div class="me-3 ">
+                        <img src="img/sunny.png" alt="sunrise-fajr">
+                        <h4 class="my-3">dhuhr</h4>
+                        <p id="fajr-time">4:53 AM</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 before   col-md-3 my-2 my-md-0 col-6">
+                    <div class="me-3">
+                        <img src="img/sunset.png" alt="sunrise-fajr">
+                        <h4 class="my-3">asr</h4>
+                        <p id="fajr-time">4:53 AM</p>
+                    </div>
+                </div>
+                <div class="col-lg-2  before  col-md-3 mt-md-3 mt-lg-0 col-6">
+                    <div class="me-3">
+                        <img src="img/sunset (1).png" alt="sunrise-fajr">
+                        <h4 class="my-3">maghrib</h4>
+                        <p id="fajr-time">4:53 AM</p>
+                    </div>
+                </div>
+                <div class="col-lg-2  before  col-md-3 mt-md-3 mt-lg-0 col-6">
+                    <div class="me-3">
+                        <img src="img/sleeping.png" alt="sunrise-fajr">
+                        <h4 class="my-3">isha</h4>
+                        <p id="fajr-time">4:53 AM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- prayer cards -->
+
+        <!-- form -->
+        <form class="container  d-md-flex text-center  justify-content-center">
+            <input type="text" class="form-control me-2 " placeholder="Enter city">
+            <input type="text" class="form-control my-md-0 my-3  me-2" placeholder="Enter country">
+            <button type="button" class="btn btn-outline-danger  text-light">Get times</button>
+        </form>
+        <!-- form -->
+
+
+
+
+
+    </section>
+    <!-- main section -->
+
+
+
+
+
+
+    <script src="js/code.jquery.com_jquery-3.7.0.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
