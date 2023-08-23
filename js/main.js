@@ -40,9 +40,8 @@ async function PrayerTimes(city="cairo",country="egypt"){
     let data=await myUrl.json()
 let asrPrayer=data.data.timings.Asr
 
-console.log(asrPrayer);
-  
 
+  
 
 // put data in document
     dateToday.innerHTML= data.data.date.gregorian.weekday.en+" "+data.data.date.gregorian.date
@@ -50,11 +49,18 @@ console.log(asrPrayer);
 
 
 
-
-
 }
 PrayerTimes()
 // my request
+
+
+
+
+
+
+
+
+
 
 
 
