@@ -28,7 +28,7 @@
 
 
         <!-- current time -->
-        <p class="container  rounded">10:20:30 AM</p>
+        <p id="current-time" class="container rounded"></p>
         <!-- current time -->
 
 
@@ -57,35 +57,35 @@
                     <div class="me-3 ">
                         <img src="img/sunrise.png" alt="sunrise-fajr">
                         <h4 class="my-3">sunrise</h4>
-                        <p id="fajr-time">4:53 AM</p>
+                        <p id="sunrise-time">4:53 AM</p>
                     </div>
                 </div>
                 <div class="col-lg-2 active  col-md-3 my-2 my-md-0 col-6">
                     <div class="me-3 ">
                         <img src="img/sunny.png" alt="sunrise-fajr">
                         <h4 class="my-3">dhuhr</h4>
-                        <p id="fajr-time">4:53 AM</p>
+                        <p id="dhuhr-time">4:53 AM</p>
                     </div>
                 </div>
                 <div class="col-lg-2 before   col-md-3 my-2 my-md-0 col-6">
                     <div class="me-3">
                         <img src="img/sunset.png" alt="sunrise-fajr">
                         <h4 class="my-3">asr</h4>
-                        <p id="fajr-time">4:53 AM</p>
+                        <p id="asr-time">4:53 AM</p>
                     </div>
                 </div>
                 <div class="col-lg-2  before  col-md-3 mt-md-3 mt-lg-0 col-6">
                     <div class="me-3">
                         <img src="img/sunset (1).png" alt="sunrise-fajr">
                         <h4 class="my-3">maghrib</h4>
-                        <p id="fajr-time">4:53 AM</p>
+                        <p id="-time">4:53 AM</p>
                     </div>
                 </div>
                 <div class="col-lg-2  before  col-md-3 mt-md-3 mt-lg-0 col-6">
                     <div class="me-3">
                         <img src="img/sleeping.png" alt="sunrise-fajr">
                         <h4 class="my-3">isha</h4>
-                        <p id="fajr-time">4:53 AM</p>
+                        <p id="isha-time">4:53 AM</p>
                     </div>
                 </div>
             </div>
@@ -94,9 +94,9 @@
 
         <!-- form -->
         <form class="container  d-md-flex text-center  justify-content-center">
-            <input type="text" class="form-control me-2 " placeholder="Enter city">
-            <input type="text" class="form-control my-md-0 my-3  me-2" placeholder="Enter country">
-            <button type="button" class="btn btn-outline-danger  text-light">Get times</button>
+            <input id="input-city" type="text" class="form-control me-2 " placeholder="Enter city">
+            <input id="input-country" type="text" class="form-control my-md-0 my-3  me-2" placeholder="Enter country">
+            <button id="button" type="button" class="btn btn-outline-danger  text-light">Get times</button>
         </form>
         <!-- form -->
 
