@@ -30,7 +30,7 @@
 /* header city and date */
 .city-date-main {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 0px;
 
 }
 
@@ -59,9 +59,9 @@
 /* current time */
 .city-date-main+p {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 17px;
     background-color: var(--main-color);
-    font-size: 40px;
+    font-size: 30px;
     padding: 5px 0;
 }
 
@@ -132,8 +132,7 @@ border-radius: 10px;
 
 /* form */
 form{
-    margin-top: 80px;
-    padding-bottom: 100px;
+   padding: 20px 0;
   
 }
 form input{
@@ -182,11 +181,7 @@ form input{
         width: 90% !important;
     }
 }
-@media (min-width: 1290px) and (max-width: 2500px) {
-    .bg-img {
-        height: 100vh;
-    }  
-}
+
 /* media */
 
 

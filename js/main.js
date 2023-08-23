@@ -42,7 +42,6 @@ let asrPrayer=data.data.timings.Asr
 
 
   
-
 // put data in document
     dateToday.innerHTML= data.data.date.gregorian.weekday.en+" "+data.data.date.gregorian.date
     maincity.innerHTML=city
