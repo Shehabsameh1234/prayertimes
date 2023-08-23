@@ -26,7 +26,6 @@
 .bg-img {
     background-image: url(../img/pexels-pat-whelen-5615784.jpg);
     width: 100%;
-  
     background-position: center;
     background-size: cover;
     color: white; 
@@ -141,12 +140,14 @@ border-radius: 10px;
 
 /* form */
 form{
-    margin-top: 100px;
-padding-bottom: 147px;
-   
+    margin-top: 80px;
+    padding-bottom: 100px;
+
+  
 }
 form input{
    width: 40% !important;
+  
 }
 .form-control {
     color: white;
@@ -190,5 +191,15 @@ form input{
     .container {
         width: 90% !important;
     }
+}
+@media (min-width: 1290px) and (max-width: 2500px) {
+    .bg-img {
+        height: 100vh;
+    }
     
 }
+
+
+
+
+
