@@ -38,7 +38,10 @@ setInterval(timeNow,1000)
 async function PrayerTimes(city="cairo",country="egypt"){
     let myUrl= await fetch(`https://api.aladhan.com/v1/timingsByCity/today?city=${city}&country=${country}&method=5`).catch(error=>console.log(error))
     let data=await myUrl.json()
-    console.log(data.data);
+let asrPrayer=data.data.timings.Asr
+
+console.log(asrPrayer);
+  
 
 
 // put data in document
@@ -52,6 +55,8 @@ async function PrayerTimes(city="cairo",country="egypt"){
 }
 PrayerTimes()
 // my request
+
+
 
 
 
