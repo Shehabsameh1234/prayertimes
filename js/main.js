@@ -13,6 +13,7 @@ let ishaTime = document.getElementById("isha-time")
 let inputCity = document.getElementById("input-city")
 let inputCountry = document.getElementById("input-country")
 let btn = document.getElementById("button")
+let cardsPrayer = document.querySelectorAll("#prayer-cards div.col-lg-2")
 // global var
 
 // get current time
@@ -102,6 +103,10 @@ btn.addEventListener("click", function () {
 // click on the button to get the city times
 
 
+
+
+
+
 // get the next prayer and remainig time
 function setNextPrayer() {
     let end = new Date(`${todayDate} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
@@ -117,6 +122,8 @@ function setNextPrayer() {
     let seconds = Math.floor((distanceFajr % minute) / second)
     nextPrayerName.innerHTML = "Fajr"
     remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+    cardsPrayer[0].classList.replace("before","active")
+
     if (distanceFajr <= 0) {
         let end = new Date(`${todayDate} ${localStorage.getItem("dhuhrPrayerTime")  + ":" + "00"}`);
         var distancedhuhr = end - now;
@@ -126,9 +133,12 @@ function setNextPrayer() {
         let seconds = Math.floor((distancedhuhr % minute) / second)
         nextPrayerName.innerHTML = "Dhuhr"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[2].classList.replace("before","active")
+        cardsPrayer[0].classList.replace("active","before")
+
 
     }
-    if (distancedhuhr <= 0) {
+    if (distancedhuhr <= 0 ) {
         let end = new Date(`${todayDate} ${localStorage.getItem("asrPrayerTime")  + ":" + "00"}`);
         var distanceAsr = end - now;
         let hours = Math.floor((distanceAsr % day) / hour)
@@ -137,6 +147,9 @@ function setNextPrayer() {
         let seconds = Math.floor((distanceAsr % minute) / second)
         nextPrayerName.innerHTML = "asr"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[3].classList.replace("before","active")
+        cardsPrayer[2].classList.replace("active","before")
+
     }
     if (distanceAsr <= 0) {
         let end = new Date(`${todayDate} ${localStorage.getItem("maghribPrayerTime")  + ":" + "00"}`);
@@ -147,6 +160,10 @@ function setNextPrayer() {
         let seconds = Math.floor((distanceMaghrib % minute) / second)
         nextPrayerName.innerHTML = "maghrib"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+
+        cardsPrayer[4].classList.replace("before","active")
+        cardsPrayer[3].classList.replace("active","before")
+
     }
     if (distanceMaghrib <= 0) {
         let end = new Date(`${todayDate} ${localStorage.getItem("ishaPrayerTime")  + ":" + "00"}`);
@@ -157,6 +174,9 @@ function setNextPrayer() {
         let seconds = Math.floor((distanceIsha % minute) / second)
         nextPrayerName.innerHTML = "isha"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[5].classList.replace("before","active")
+        cardsPrayer[4].classList.replace("active","before")
+
     }
 
 }
