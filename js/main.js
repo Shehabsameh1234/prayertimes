@@ -135,6 +135,7 @@ function setNextPrayer() {
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
         cardsPrayer[2].classList.replace("before","active")
         cardsPrayer[0].classList.replace("active","before")
+        cardsPrayer[3].classList.replace("active","before")
 
 
     }
@@ -149,6 +150,7 @@ function setNextPrayer() {
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
         cardsPrayer[3].classList.replace("before","active")
         cardsPrayer[2].classList.replace("active","before")
+        cardsPrayer[4].classList.replace("active","before")
 
     }
     if (distanceAsr <= 0) {
@@ -163,6 +165,7 @@ function setNextPrayer() {
 
         cardsPrayer[4].classList.replace("before","active")
         cardsPrayer[3].classList.replace("active","before")
+        cardsPrayer[5].classList.replace("active","before")
 
     }
     if (distanceMaghrib <= 0) {
@@ -176,6 +179,7 @@ function setNextPrayer() {
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
         cardsPrayer[5].classList.replace("before","active")
         cardsPrayer[4].classList.replace("active","before")
+        cardsPrayer[0].classList.replace("active","before")
 
     }
 
