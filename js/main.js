@@ -28,12 +28,14 @@ setInterval(timeNow, 1000)
 // get current time
 
 
-
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth() + 1;
-const day = today.getDate();
+// get date of today
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth() + 1;
+let day = today.getDate();
 let todayDate = `${month}-${day}-${year}`
+// get date of today
+
 
 
 
@@ -84,10 +86,6 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
         dhuhrTime.innerHTML = dhuhrFormatTime + dhuhrPrayer.slice(2, 5) + " PM"
     }
 
-
-
-
-
     // asr prayer time
     let asrPrayer = data.data.timings.Asr
     let asrFormatTime = asrPrayer.slice(0, 2) - 12
@@ -99,7 +97,6 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
     let maghribFormatTime = maghribPrayer.slice(0, 2) - 12
     maghribTime.innerHTML = maghribFormatTime + maghribPrayer.slice(2, 5) + " PM"
 
-
     // isha prayer time
     let ishaPrayer = data.data.timings.Isha
     let ishaFormatTime = ishaPrayer.slice(0, 2) - 12
@@ -107,46 +104,17 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
 
 
 
+// send prayers time to localstorage to use it again
+
+    localStorage.setItem("fajrPrayerTime",fajrPrayer)
+    localStorage.setItem("dhuhrPrayerTime",dhuhrPrayer)
+    localStorage.setItem("asrPrayerTime",asrPrayer)
+    localStorage.setItem("maghribPrayerTime",maghribPrayer)
+    localStorage.setItem("ishaPrayerTime",ishaPrayer)
+// send prayers time to localstorage to use it again
 
 
 
-
-    function setNextPrayer() {
-        let end = new Date(`${todayDate} ${fajrPrayer + ":" + "00"}`);
-        let second = 1000;
-        let minute = second * 60;
-        let hour = minute * 60;
-        let day = hour * 24;
-        let now = new Date();
-        var distanceFajr = end - now;
-        let hours = Math.floor((distanceFajr % day) / hour)
-        let mins = Math.floor((distanceFajr % hour) / minute)
-        let seconds = Math.floor((distanceFajr % minute) / second)
-        nextPrayerName.innerHTML = "Fajr"
-        nextPrayerName.innerHTML = "Fajr"
-        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-        if (distanceFajr <= 0) {
-            let end = new Date(`${todayDate} ${dhuhrPrayer + ":" + "00"}`);
-            var distancedhuhr = end - now;
-            let hours = Math.floor((distancedhuhr % day) / hour)
-            let mins = Math.floor((distancedhuhr % hour) / minute)
-            let seconds = Math.floor((distancedhuhr % minute) / second)
-            nextPrayerName.innerHTML = "Dhuhr"
-            remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-           
-        } 
-        if(distancedhuhr<=0){
-            let end = new Date(`${todayDate} ${asrPrayer + ":" + "00"}`);
-            var distancedhuhr = end - now;
-            let hours = Math.floor((distancedhuhr % day) / hour)
-            let mins = Math.floor((distancedhuhr % hour) / minute)
-            let seconds = Math.floor((distancedhuhr % minute) / second)
-            nextPrayerName.innerHTML = "asr"
-            remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-        }
-
-    }
-    setInterval(setNextPrayer, 1000)
 
 
 
@@ -180,7 +148,55 @@ btn.addEventListener("click", function () {
 
 
 
+ let fajrPrayer= localStorage.getItem("fajrPrayerTime")
+ let dhuhrPrayer= localStorage.getItem("dhuhrPrayerTime")
+ let asrPrayer= localStorage.getItem("asrPrayerTime")
 
+
+
+
+
+
+    function setNextPrayer() {
+        let end = new Date(`${todayDate} ${fajrPrayer + ":" + "00"}`);
+        let second = 1000;
+        let minute = second * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let now = new Date();
+        var distanceFajr = end - now;
+        let hours = Math.floor((distanceFajr % day) / hour)
+        let mins = Math.floor((distanceFajr % hour) / minute)
+        if (mins < 10) { mins = "0" + mins }
+        let seconds = Math.floor((distanceFajr % minute) / second)
+        nextPrayerName.innerHTML = "Fajr"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        if (distanceFajr <= 0) {
+            let end = new Date(`${todayDate} ${dhuhrPrayer + ":" + "00"}`);
+            var distancedhuhr = end - now;
+            let hours = Math.floor((distancedhuhr % day) / hour)
+            let mins = Math.floor((distancedhuhr % hour) / minute)
+            if (mins < 10) { mins = "0" + mins }
+            let seconds = Math.floor((distancedhuhr % minute) / second)
+            nextPrayerName.innerHTML = "Dhuhr"
+            remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+
+        }
+        if (distancedhuhr <= 0) {
+            let end = new Date(`${todayDate} ${asrPrayer + ":" + "00"}`);
+            var distancedhuhr = end - now;
+            let hours = Math.floor((distancedhuhr % day) / hour)
+            let mins = Math.floor((distancedhuhr % hour) / minute)
+            if (mins < 10) { mins = "0" + mins }
+            let seconds = Math.floor((distancedhuhr % minute) / second)
+            nextPrayerName.innerHTML = "asr"
+            remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+     
+        }
+
+    }
+
+    setInterval(setNextPrayer,1000)
 
 
 
