@@ -13,6 +13,7 @@ let ishaTime = document.getElementById("isha-time")
 let inputCity = document.getElementById("input-city")
 let inputCountry = document.getElementById("input-country")
 let btn = document.getElementById("button")
+
 // global var
 
 
@@ -56,6 +57,8 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
 
 
 
+
+
     // put data in document
     dateToday.innerHTML = data.data.date.gregorian.weekday.en + " " + data.data.date.gregorian.date
     maincity.innerHTML = city
@@ -80,6 +83,9 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
         dhuhrFormatTime = dhuhrPrayer.slice(0, 2) - 12
         dhuhrTime.innerHTML = dhuhrFormatTime + dhuhrPrayer.slice(2, 5) + " PM"
     }
+
+
+
 
 
     // asr prayer time
@@ -112,26 +118,31 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
         let hour = minute * 60;
         let day = hour * 24;
         let now = new Date();
-        let distanceFajr = end - now;
+        var distanceFajr = end - now;
         let hours = Math.floor((distanceFajr % day) / hour)
         let mins = Math.floor((distanceFajr % hour) / minute)
         let seconds = Math.floor((distanceFajr % minute) / second)
         nextPrayerName.innerHTML = "Fajr"
         nextPrayerName.innerHTML = "Fajr"
-        remainingTime.innerHTML=hours+":"+mins+":"+seconds
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
         if (distanceFajr <= 0) {
             let end = new Date(`${todayDate} ${dhuhrPrayer + ":" + "00"}`);
-            let second = 1000;
-            let minute = second * 60;
-            let hour = minute * 60;
-            let day = hour * 24;
-            let now = new Date();
-            let distancedhuhr = end - now;
+            var distancedhuhr = end - now;
             let hours = Math.floor((distancedhuhr % day) / hour)
             let mins = Math.floor((distancedhuhr % hour) / minute)
             let seconds = Math.floor((distancedhuhr % minute) / second)
             nextPrayerName.innerHTML = "Dhuhr"
-            remainingTime.innerHTML=hours+":"+mins+":"+seconds
+            remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+           
+        } 
+        if(distancedhuhr<=0){
+            let end = new Date(`${todayDate} ${asrPrayer + ":" + "00"}`);
+            var distancedhuhr = end - now;
+            let hours = Math.floor((distancedhuhr % day) / hour)
+            let mins = Math.floor((distancedhuhr % hour) / minute)
+            let seconds = Math.floor((distancedhuhr % minute) / second)
+            nextPrayerName.innerHTML = "asr"
+            remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
         }
 
     }
@@ -158,6 +169,9 @@ btn.addEventListener("click", function () {
     }
 })
 // click on the button to get the city times
+
+
+
 
 
 
