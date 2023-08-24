@@ -81,13 +81,13 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
     ishaTime.innerHTML = ishaFormatTime + ishaPrayer.slice(2, 5) + " PM"
 
 
-// send prayers time to localstorage to use it again
-    localStorage.setItem("fajrPrayerTime",fajrPrayer)
-    localStorage.setItem("dhuhrPrayerTime",dhuhrPrayer)
-    localStorage.setItem("asrPrayerTime",asrPrayer)
-    localStorage.setItem("maghribPrayerTime",maghribPrayer)
-    localStorage.setItem("ishaPrayerTime",ishaPrayer)
-// send prayers time to localstorage to use it again
+    // send prayers time to localstorage to use it again
+    localStorage.setItem("fajrPrayerTime", fajrPrayer)
+    localStorage.setItem("dhuhrPrayerTime", dhuhrPrayer)
+    localStorage.setItem("asrPrayerTime", asrPrayer)
+    localStorage.setItem("maghribPrayerTime", maghribPrayer)
+    localStorage.setItem("ishaPrayerTime", ishaPrayer)
+    // send prayers time to localstorage to use it again
 }
 PrayerTimes()
 // my request
@@ -122,10 +122,10 @@ function setNextPrayer() {
     let seconds = Math.floor((distanceFajr % minute) / second)
     nextPrayerName.innerHTML = "Fajr"
     remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-    cardsPrayer[0].classList.replace("before","active")
+    cardsPrayer[0].classList.replace("before", "active")
 
     if (distanceFajr <= 0) {
-        let end = new Date(`${todayDate} ${localStorage.getItem("dhuhrPrayerTime")  + ":" + "00"}`);
+        let end = new Date(`${todayDate} ${localStorage.getItem("dhuhrPrayerTime") + ":" + "00"}`);
         var distancedhuhr = end - now;
         let hours = Math.floor((distancedhuhr % day) / hour)
         let mins = Math.floor((distancedhuhr % hour) / minute)
@@ -133,14 +133,14 @@ function setNextPrayer() {
         let seconds = Math.floor((distancedhuhr % minute) / second)
         nextPrayerName.innerHTML = "Dhuhr"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-        cardsPrayer[2].classList.replace("before","active")
-        cardsPrayer[0].classList.replace("active","before")
-        cardsPrayer[3].classList.replace("active","before")
+        cardsPrayer[2].classList.replace("before", "active")
+        cardsPrayer[0].classList.replace("active", "before")
+        cardsPrayer[3].classList.replace("active", "before")
 
 
     }
-    if (distancedhuhr <= 0 ) {
-        let end = new Date(`${todayDate} ${localStorage.getItem("asrPrayerTime")  + ":" + "00"}`);
+    if (distancedhuhr <= 0) {
+        let end = new Date(`${todayDate} ${localStorage.getItem("asrPrayerTime") + ":" + "00"}`);
         var distanceAsr = end - now;
         let hours = Math.floor((distanceAsr % day) / hour)
         let mins = Math.floor((distanceAsr % hour) / minute)
@@ -148,13 +148,13 @@ function setNextPrayer() {
         let seconds = Math.floor((distanceAsr % minute) / second)
         nextPrayerName.innerHTML = "asr"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-        cardsPrayer[3].classList.replace("before","active")
-        cardsPrayer[2].classList.replace("active","before")
-        cardsPrayer[4].classList.replace("active","before")
+        cardsPrayer[3].classList.replace("before", "active")
+        cardsPrayer[2].classList.replace("active", "before")
+        cardsPrayer[4].classList.replace("active", "before")
 
     }
     if (distanceAsr <= 0) {
-        let end = new Date(`${todayDate} ${localStorage.getItem("maghribPrayerTime")  + ":" + "00"}`);
+        let end = new Date(`${todayDate} ${localStorage.getItem("maghribPrayerTime") + ":" + "00"}`);
         var distanceMaghrib = end - now;
         let hours = Math.floor((distanceMaghrib % day) / hour)
         let mins = Math.floor((distanceMaghrib % hour) / minute)
@@ -163,13 +163,13 @@ function setNextPrayer() {
         nextPrayerName.innerHTML = "maghrib"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
 
-        cardsPrayer[4].classList.replace("before","active")
-        cardsPrayer[3].classList.replace("active","before")
-        cardsPrayer[5].classList.replace("active","before")
+        cardsPrayer[4].classList.replace("before", "active")
+        cardsPrayer[3].classList.replace("active", "before")
+        cardsPrayer[5].classList.replace("active", "before")
 
     }
     if (distanceMaghrib <= 0) {
-        let end = new Date(`${todayDate} ${localStorage.getItem("ishaPrayerTime")  + ":" + "00"}`);
+        let end = new Date(`${todayDate} ${localStorage.getItem("ishaPrayerTime") + ":" + "00"}`);
         var distanceIsha = end - now;
         let hours = Math.floor((distanceIsha % day) / hour)
         let mins = Math.floor((distanceIsha % hour) / minute)
@@ -177,14 +177,32 @@ function setNextPrayer() {
         let seconds = Math.floor((distanceIsha % minute) / second)
         nextPrayerName.innerHTML = "isha"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-        cardsPrayer[5].classList.replace("before","active")
-        cardsPrayer[4].classList.replace("active","before")
-        cardsPrayer[0].classList.replace("active","before")
+        cardsPrayer[5].classList.replace("before", "active")
+        cardsPrayer[4].classList.replace("active", "before")
+        cardsPrayer[0].classList.replace("active", "before")
+    }
+    if (distanceIsha <= 0) {
+        let end = new Date(`${todayDate} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
+        let second = 1000;
+        let minute = second * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let now = new Date();
+        var distanceFajr = end - now;
+        let hours = Math.floor((distanceFajr % day) / hour)
+        let mins = Math.floor((distanceFajr % hour) / minute)
+        if (mins < 10) { mins = "0" + mins }
+        let seconds = Math.floor((distanceFajr % minute) / second)
+        nextPrayerName.innerHTML = "Fajr"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[0].classList.replace("before", "active")
+        cardsPrayer[5].classList.replace("active", "before")
+        cardsPrayer[2].classList.replace("active", "before")
 
     }
 
 }
-setInterval(setNextPrayer,1000)
+setInterval(setNextPrayer, 1000)
 // get the next prayer and remainig time
 
 
