@@ -31,6 +31,8 @@ let year = today.getFullYear();
 let month = today.getMonth() + 1;
 let day = today.getDate();
 let todayDate = `${month}-${day}-${year}`
+let Tomorrow = `${month}-${day+1}-${year}`
+
 // get date of today
 
 // my request
@@ -173,7 +175,7 @@ function setNextPrayer() {
         cardsPrayer[0].classList.replace("active", "before")
     }
     if (distanceIsha <= 0) {
-        let end = new Date(`${todayDate} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
+        let end = new Date(`${Tomorrow} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
         let second = 1000;
         let minute = second * 60;
         let hour = minute * 60;
@@ -182,7 +184,7 @@ function setNextPrayer() {
         var distanceFajr = end - now;
         let hours = Math.floor((distanceFajr % day) / hour)
         let mins = Math.floor((distanceFajr % hour) / minute)
-        if (mins < 10) { mins = "0" + mins }
+       
         let seconds = Math.floor((distanceFajr % minute) / second)
         nextPrayerName.innerHTML = "Fajr"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
