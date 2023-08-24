@@ -13,10 +13,7 @@ let ishaTime = document.getElementById("isha-time")
 let inputCity = document.getElementById("input-city")
 let inputCountry = document.getElementById("input-country")
 let btn = document.getElementById("button")
-
 // global var
-
-
 
 // get current time
 function timeNow() {
@@ -27,7 +24,6 @@ function timeNow() {
 setInterval(timeNow, 1000)
 // get current time
 
-
 // get date of today
 let today = new Date();
 let year = today.getFullYear();
@@ -37,29 +33,10 @@ let todayDate = `${month}-${day}-${year}`
 // get date of today
 
 
-
-
 // my request
 async function PrayerTimes(city = "cairo", country = "egypt") {
     let myUrl = await fetch(`https://api.aladhan.com/v1/timingsByCity/today?city=${city}&country=${country}&fbclid=IwAR0D1g0U7gW-2c24FU7N7mrGfGbKW-Cp20_mzy7Mk9xIygxmshzQ4fn_pcU`).catch(error => console.log(error))
     let data = await myUrl.json()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // put data in document
     dateToday.innerHTML = data.data.date.gregorian.weekday.en + " " + data.data.date.gregorian.date
@@ -123,10 +100,6 @@ btn.addEventListener("click", function () {
     }
 })
 // click on the button to get the city times
-
-
-
-
 
 
 // get the next prayer and remainig time
