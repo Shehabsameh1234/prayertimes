@@ -70,7 +70,7 @@ async function PrayerTimes(city = "cairo") {
     let maghribPrayer = data.data.timings.Maghrib
     let maghribFormatTime = maghribPrayer.slice(0, 2) - 12
     maghribTime.innerHTML = maghribFormatTime + maghribPrayer.slice(2, 5) + " PM"
-    
+
     // isha prayer time
     let ishaPrayer = data.data.timings.Isha
     let ishaFormatTime = ishaPrayer.slice(0, 2) - 12
@@ -90,7 +90,7 @@ PrayerTimes()
 
 // click on the button to get the city times
 btn.addEventListener("click", function () {
-    if (inputCity.value != ""&&inputCountry.value!="") {
+    if (inputCity.value != "") {
         let city = inputCity.value
         let country = inputCountry.value
         PrayerTimes(city,country)
