@@ -16,14 +16,44 @@ let btn = document.getElementById("button")
 let cardsPrayer = document.querySelectorAll("#prayer-cards div.col-lg-2")
 // global var
 
-// get current time
-function timeNow() {
-    let date = new Date();
-    let formattedTime = date.toLocaleTimeString({ hour12: true });;
-    currentTime.innerHTML = formattedTime
+
+
+
+
+async function timeZone() {
+    let myurl = await fetch(`http://worldtimeapi.org/api/timezone/europe/london`).catch(error => console.log(error))
+    let data =await myurl.json()
+    console.log(data);
+        let date = new Date(data.datetime);
+        let formattedTime = date.toLocaleTimeString({ hour12: true });;
+        currentTime.innerHTML = formattedTime
 }
-setInterval(timeNow, 1000)
-// get current time
+timeZone()
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // get current time
+
+// // get current time
+
+
+
+
+
+
+
+
+
 
 // get date of today
 let today = new Date();
@@ -35,8 +65,8 @@ let todayDate = `${month}-${day}-${year}`
 
 
 // my request
-async function PrayerTimes(city = "cairo", country = "egypt") {
-    let myUrl = await fetch(`https://api.aladhan.com/v1/timingsByCity/today?city=${city}&country=${country}&fbclid=IwAR0D1g0U7gW-2c24FU7N7mrGfGbKW-Cp20_mzy7Mk9xIygxmshzQ4fn_pcU`).catch(error => console.log(error))
+async function PrayerTimes(city = "cairo") {
+    let myUrl = await fetch(`https://api.aladhan.com/v1/timingsByCity/today?city=${city}&country=&fbclid=IwAR0D1g0U7gW-2c24FU7N7mrGfGbKW-Cp20_mzy7Mk9xIygxmshzQ4fn_pcU`).catch(error => console.log(error))
     let data = await myUrl.json()
 
     // put data in document
@@ -94,10 +124,11 @@ PrayerTimes()
 
 // click on the button to get the city times
 btn.addEventListener("click", function () {
-    if (inputCity.value != "") {
+    if (inputCity.value != ""&&inputCountry.value!="") {
         let city = inputCity.value
-        let country = inputCountry.value
-        PrayerTimes(city, country)
+        let zone = inputCountry.value
+        PrayerTimes(city)
+        timeZone(city,zone)
     }
 })
 // click on the button to get the city times
