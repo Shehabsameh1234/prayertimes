@@ -16,44 +16,14 @@ let btn = document.getElementById("button")
 let cardsPrayer = document.querySelectorAll("#prayer-cards div.col-lg-2")
 // global var
 
-
-
-
-
-async function timeZone() {
-    let myurl = await fetch(`http://worldtimeapi.org/api/timezone/europe/london`).catch(error => console.log(error))
-    let data =await myurl.json()
-    console.log(data);
-        let date = new Date(data.datetime);
-        let formattedTime = date.toLocaleTimeString({ hour12: true });;
-        currentTime.innerHTML = formattedTime
+// get current time
+function timeNow(){
+    let date = new Date();
+    let formattedTime = date.toLocaleTimeString({ hour12: true });;
+    currentTime.innerHTML = formattedTime
 }
-timeZone()
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // get current time
-
-// // get current time
-
-
-
-
-
-
-
-
-
+setInterval(timeNow,1000)
+// get current time
 
 // get date of today
 let today = new Date();
@@ -63,7 +33,6 @@ let day = today.getDate();
 let todayDate = `${month}-${day}-${year}`
 // get date of today
 
-
 // my request
 async function PrayerTimes(city = "cairo") {
     let myUrl = await fetch(`https://api.aladhan.com/v1/timingsByCity/today?city=${city}&country=&fbclid=IwAR0D1g0U7gW-2c24FU7N7mrGfGbKW-Cp20_mzy7Mk9xIygxmshzQ4fn_pcU`).catch(error => console.log(error))
@@ -72,7 +41,6 @@ async function PrayerTimes(city = "cairo") {
     // put data in document
     dateToday.innerHTML = data.data.date.gregorian.weekday.en + " " + data.data.date.gregorian.date
     maincity.innerHTML = city
-
 
     // fajr prayer time
     let fajrPrayer = data.data.timings.Fajr
@@ -93,18 +61,16 @@ async function PrayerTimes(city = "cairo") {
         dhuhrFormatTime = dhuhrPrayer.slice(0, 2) - 12
         dhuhrTime.innerHTML = dhuhrFormatTime + dhuhrPrayer.slice(2, 5) + " PM"
     }
-
     // asr prayer time
     let asrPrayer = data.data.timings.Asr
     let asrFormatTime = asrPrayer.slice(0, 2) - 12
     asrTime.innerHTML = asrFormatTime + asrPrayer.slice(2, 5) + " PM"
 
-
     // maghrib prayer time
     let maghribPrayer = data.data.timings.Maghrib
     let maghribFormatTime = maghribPrayer.slice(0, 2) - 12
     maghribTime.innerHTML = maghribFormatTime + maghribPrayer.slice(2, 5) + " PM"
-
+    
     // isha prayer time
     let ishaPrayer = data.data.timings.Isha
     let ishaFormatTime = ishaPrayer.slice(0, 2) - 12
@@ -126,17 +92,11 @@ PrayerTimes()
 btn.addEventListener("click", function () {
     if (inputCity.value != ""&&inputCountry.value!="") {
         let city = inputCity.value
-        let zone = inputCountry.value
-        PrayerTimes(city)
-        timeZone(city,zone)
+        let country = inputCountry.value
+        PrayerTimes(city,country)
     }
 })
 // click on the button to get the city times
-
-
-
-
-
 
 // get the next prayer and remainig time
 function setNextPrayer() {
@@ -229,7 +189,6 @@ function setNextPrayer() {
         cardsPrayer[0].classList.replace("before", "active")
         cardsPrayer[5].classList.replace("active", "before")
         cardsPrayer[2].classList.replace("active", "before")
-
     }
 
 }
