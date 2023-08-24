@@ -2,10 +2,8 @@
 let maincity = document.getElementById("city-main")
 let dateToday = document.getElementById("date-today")
 let currentTime = document.getElementById("current-time")
-let nextPrayerText = document.getElementById("next-prayer-text")
 let nextPrayerName = document.getElementById("next-prayer-name")
-let remainingTimeText = document.getElementById("remainig-time-text")
-let remainingTime = document.getElementById("remainig-time")
+let remainingTime = document.getElementById("remaining-time")
 let fajrTime = document.getElementById("fajr-time")
 let sunriseTime = document.getElementById("sunrise-time")
 let dhuhrTime = document.getElementById("dhuhr-time")
@@ -30,7 +28,11 @@ setInterval(timeNow, 1000)
 
 
 
-
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+let todayDate = `${month}-${day}-${year}`
 
 
 
@@ -39,7 +41,12 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
     let myUrl = await fetch(`https://api.aladhan.com/v1/timingsByCity/today?city=${city}&country=${country}&fbclid=IwAR0D1g0U7gW-2c24FU7N7mrGfGbKW-Cp20_mzy7Mk9xIygxmshzQ4fn_pcU`).catch(error => console.log(error))
     let data = await myUrl.json()
 
-    console.log(data);
+
+
+
+
+
+
 
 
 
@@ -97,6 +104,44 @@ async function PrayerTimes(city = "cairo", country = "egypt") {
 
 
 
+
+    function setNextPrayer() {
+        let end = new Date(`${todayDate} ${fajrPrayer + ":" + "00"}`);
+        let second = 1000;
+        let minute = second * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let now = new Date();
+        let distanceFajr = end - now;
+        let hours = Math.floor((distanceFajr % day) / hour)
+        let mins = Math.floor((distanceFajr % hour) / minute)
+        let seconds = Math.floor((distanceFajr % minute) / second)
+        nextPrayerName.innerHTML = "Fajr"
+        nextPrayerName.innerHTML = "Fajr"
+        remainingTime.innerHTML=hours+":"+mins+":"+seconds
+        if (distanceFajr <= 0) {
+            let end = new Date(`${todayDate} ${dhuhrPrayer + ":" + "00"}`);
+            let second = 1000;
+            let minute = second * 60;
+            let hour = minute * 60;
+            let day = hour * 24;
+            let now = new Date();
+            let distancedhuhr = end - now;
+            let hours = Math.floor((distancedhuhr % day) / hour)
+            let mins = Math.floor((distancedhuhr % hour) / minute)
+            let seconds = Math.floor((distancedhuhr % minute) / second)
+            nextPrayerName.innerHTML = "Dhuhr"
+            remainingTime.innerHTML=hours+":"+mins+":"+seconds
+        }
+
+    }
+    setInterval(setNextPrayer, 1000)
+
+
+
+
+
+
 }
 PrayerTimes()
 // my request
@@ -113,7 +158,6 @@ btn.addEventListener("click", function () {
     }
 })
 // click on the button to get the city times
-
 
 
 
