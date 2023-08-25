@@ -16,13 +16,23 @@ let btn = document.getElementById("button")
 let cardsPrayer = document.querySelectorAll("#prayer-cards div.col-lg-2")
 // global var
 
+// get current time
+function timeNow(){
+    let date = new Date();
+    let formattedTime = date.toLocaleTimeString({ hour12: true });;
+    currentTime.innerHTML = formattedTime
+}
+setInterval(timeNow,1000)
+// get current time
+
 // get date of today
 let today = new Date();
 let year = today.getFullYear();
 let month = today.getMonth() + 1;
 let day = today.getDate();
 let todayDate = `${month}-${day}-${year}`
-let Tomorrow = `${month}-${day + 1}-${year}`
+let Tomorrow = `${month}-${day+1}-${year}`
+
 // get date of today
 
 // my request
@@ -85,144 +95,107 @@ btn.addEventListener("click", function () {
     if (inputCity.value != "") {
         let city = inputCity.value
         let country = inputCountry.value
-        PrayerTimes(city, country)
-        setInterval(getTimeZone, 1000)
+        PrayerTimes(city,country)
     }
 })
 // click on the button to get the city times
 
+// get the next prayer and remainig time
+function setNextPrayer() {
+    let end = new Date(`${todayDate} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
+    let second = 1000;
+    let minute = second * 60;
+    let hour = minute * 60;
+    let day = hour * 24;
+    let now = new Date();
+    var distanceFajr = end - now;
+    let hours = Math.floor((distanceFajr % day) / hour)
+    let mins = Math.floor((distanceFajr % hour) / minute)
+    if (mins < 10) { mins = "0" + mins }
+    let seconds = Math.floor((distanceFajr % minute) / second)
+    nextPrayerName.innerHTML = "Fajr"
+    remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+    cardsPrayer[0].classList.replace("before", "active")
+
+    if (distanceFajr <= 0) {
+        let end = new Date(`${todayDate} ${localStorage.getItem("dhuhrPrayerTime") + ":" + "00"}`);
+        var distancedhuhr = end - now;
+        let hours = Math.floor((distancedhuhr % day) / hour)
+        let mins = Math.floor((distancedhuhr % hour) / minute)
+        if (mins < 10) { mins = "0" + mins }
+        let seconds = Math.floor((distancedhuhr % minute) / second)
+        nextPrayerName.innerHTML = "Dhuhr"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[2].classList.replace("before", "active")
+        cardsPrayer[0].classList.replace("active", "before")
+        cardsPrayer[3].classList.replace("active", "before")
 
 
-
-
-function getTimeZone() {
-    let city = inputCity.value
-    maincity.value = city
-    if (inputCity.value == "") {
-        city = "cairo"
-        PrayerTimes("cairo")
     }
-    $.ajax({
-        method: 'GET',
-        url: 'https://api.api-ninjas.com/v1/worldtime?city=' + city,
-        headers: { 'X-Api-Key': 'wEIyzcbV3s4n8alqCRr/LA==ofNXbyuxtDmPWokM' },
-        contentType: 'application/json',
-        success: function (result) {
+    if (distancedhuhr <= 0) {
+        let end = new Date(`${todayDate} ${localStorage.getItem("asrPrayerTime") + ":" + "00"}`);
+        var distanceAsr = end - now;
+        let hours = Math.floor((distanceAsr % day) / hour)
+        let mins = Math.floor((distanceAsr % hour) / minute)
+        if (mins < 10) { mins = "0" + mins }
+        let seconds = Math.floor((distanceAsr % minute) / second)
+        nextPrayerName.innerHTML = "asr"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[3].classList.replace("before", "active")
+        cardsPrayer[2].classList.replace("active", "before")
+        cardsPrayer[4].classList.replace("active", "before")
 
-            function data() {
+    }
+    if (distanceAsr <= 0) {
+        let end = new Date(`${todayDate} ${localStorage.getItem("maghribPrayerTime") + ":" + "00"}`);
+        var distanceMaghrib = end - now;
+        let hours = Math.floor((distanceMaghrib % day) / hour)
+        let mins = Math.floor((distanceMaghrib % hour) / minute)
+        if (mins < 10) { mins = "0" + mins }
+        let seconds = Math.floor((distanceMaghrib % minute) / second)
+        nextPrayerName.innerHTML = "maghrib"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
 
-                // get time of any city
-                let date = new Date(result.datetime.slice(0, 19));
-                let formattedTime = date.toLocaleTimeString({ hour12: true });;
-                currentTime.innerHTML = formattedTime
-                // get time of any city
+        cardsPrayer[4].classList.replace("before", "active")
+        cardsPrayer[3].classList.replace("active", "before")
+        cardsPrayer[5].classList.replace("active", "before")
 
-                // get the next prayer and remainig time
-                function setNextPrayer() {
-                    let end = new Date(`${todayDate} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
-                    let second = 1000;
-                    let minute = second * 60;
-                    let hour = minute * 60;
-                    let day = hour * 24;
-                    let now = new Date(result.datetime.slice(0, 19));
-                    var distanceFajr = end - now;
-                    let hours = Math.floor((distanceFajr % day) / hour)
-                    let mins = Math.floor((distanceFajr % hour) / minute)
-                    if (mins < 10) { mins = "0" + mins }
-                    let seconds = Math.floor((distanceFajr % minute) / second)
-                    nextPrayerName.innerHTML = "Fajr"
-                    remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-                    cardsPrayer[0].classList.replace("before", "active")
+    }
+    if (distanceMaghrib <= 0) {
+        let end = new Date(`${todayDate} ${localStorage.getItem("ishaPrayerTime") + ":" + "00"}`);
+        var distanceIsha = end - now;
+        let hours = Math.floor((distanceIsha % day) / hour)
+        let mins = Math.floor((distanceIsha % hour) / minute)
+        if (mins < 10) { mins = "0" + mins }
+        let seconds = Math.floor((distanceIsha % minute) / second)
+        nextPrayerName.innerHTML = "isha"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[5].classList.replace("before", "active")
+        cardsPrayer[4].classList.replace("active", "before")
+        cardsPrayer[0].classList.replace("active", "before")
+    }
+    if (distanceIsha <= 0) {
+        let end = new Date(`${Tomorrow} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
+        let second = 1000;
+        let minute = second * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let now = new Date();
+        var distanceFajr = end - now;
+        let hours = Math.floor((distanceFajr % day) / hour)
+        let mins = Math.floor((distanceFajr % hour) / minute)
+       
+        let seconds = Math.floor((distanceFajr % minute) / second)
+        nextPrayerName.innerHTML = "Fajr"
+        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
+        cardsPrayer[0].classList.replace("before", "active")
+        cardsPrayer[5].classList.replace("active", "before")
+        cardsPrayer[2].classList.replace("active", "before")
+    }
 
-                    if (distanceFajr <= 0) {
-                        let end = new Date(`${todayDate} ${localStorage.getItem("dhuhrPrayerTime") + ":" + "00"}`);
-                        var distancedhuhr = end - now;
-                        let hours = Math.floor((distancedhuhr % day) / hour)
-                        let mins = Math.floor((distancedhuhr % hour) / minute)
-                        if (mins < 10) { mins = "0" + mins }
-                        let seconds = Math.floor((distancedhuhr % minute) / second)
-                        nextPrayerName.innerHTML = "Dhuhr"
-                        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-                        cardsPrayer[2].classList.replace("before", "active")
-                        cardsPrayer[0].classList.replace("active", "before")
-                        cardsPrayer[3].classList.replace("active", "before")
-
-                    }
-                    if (distancedhuhr <= 0) {
-                        let end = new Date(`${todayDate} ${localStorage.getItem("asrPrayerTime") + ":" + "00"}`);
-                        var distanceAsr = end - now;
-                        let hours = Math.floor((distanceAsr % day) / hour)
-                        let mins = Math.floor((distanceAsr % hour) / minute)
-                        if (mins < 10) { mins = "0" + mins }
-                        let seconds = Math.floor((distanceAsr % minute) / second)
-                        nextPrayerName.innerHTML = "asr"
-                        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-                        cardsPrayer[3].classList.replace("before", "active")
-                        cardsPrayer[2].classList.replace("active", "before")
-                        cardsPrayer[4].classList.replace("active", "before")
-
-                    }
-                    if (distanceAsr <= 0) {
-                        let end = new Date(`${todayDate} ${localStorage.getItem("maghribPrayerTime") + ":" + "00"}`);
-                        var distanceMaghrib = end - now;
-                        let hours = Math.floor((distanceMaghrib % day) / hour)
-                        let mins = Math.floor((distanceMaghrib % hour) / minute)
-                        if (mins < 10) { mins = "0" + mins }
-                        let seconds = Math.floor((distanceMaghrib % minute) / second)
-                        nextPrayerName.innerHTML = "maghrib"
-                        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-
-                        cardsPrayer[4].classList.replace("before", "active")
-                        cardsPrayer[3].classList.replace("active", "before")
-                        cardsPrayer[5].classList.replace("active", "before")
-
-                    }
-                    if (distanceMaghrib <= 0) {
-                        let end = new Date(`${todayDate} ${localStorage.getItem("ishaPrayerTime") + ":" + "00"}`);
-                        var distanceIsha = end - now;
-                        let hours = Math.floor((distanceIsha % day) / hour)
-                        let mins = Math.floor((distanceIsha % hour) / minute)
-                        if (mins < 10) { mins = "0" + mins }
-                        let seconds = Math.floor((distanceIsha % minute) / second)
-                        nextPrayerName.innerHTML = "isha"
-                        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-                        cardsPrayer[5].classList.replace("before", "active")
-                        cardsPrayer[4].classList.replace("active", "before")
-                        cardsPrayer[0].classList.replace("active", "before")
-                    }
-                    if (distanceIsha <= 0) {
-                        let end = new Date(`${Tomorrow} ${localStorage.getItem("fajrPrayerTime") + ":" + "00"}`);
-                        let second = 1000;
-                        let minute = second * 60;
-                        let hour = minute * 60;
-                        let day = hour * 24;
-                        let now = new Date();
-                        var distanceFajr = end - now;
-                        let hours = Math.floor((distanceFajr % day) / hour)
-                        let mins = Math.floor((distanceFajr % hour) / minute)
-
-                        let seconds = Math.floor((distanceFajr % minute) / second)
-                        nextPrayerName.innerHTML = "Fajr"
-                        remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
-                        cardsPrayer[0].classList.replace("before", "active")
-                        cardsPrayer[5].classList.replace("active", "before")
-                        cardsPrayer[2].classList.replace("active", "before")
-                    }
-
-                }
-                setNextPrayer()
-                // get the next prayer and remainig time
-            }
-            data()
-        },
-    });
 }
-
-
-
-
-
-
+setInterval(setNextPrayer, 1000)
+// get the next prayer and remainig time
 
 
 
