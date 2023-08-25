@@ -17,7 +17,7 @@
 
 /* main class */
 .bg-img {
-    background-image: url(../img/pexels-pat-whelen-5615784.jpg);
+    background-image: url(../img/masjid.jpg);
     width: 100%;
     background-position: center;
     background-size: cover;
@@ -148,15 +148,15 @@ form input{
     border-color: var(--second-color);
     box-shadow: 0 0 0 .25rem transparent
 }
-.btn-outline-danger {
+.btn-color {
     border-color: var(--second-color)
 }
-.btn-outline-danger:hover {
+.btn-color:hover {
     color: #fff;
     background-color: var(--second-color);
     border-color: var(--second-color)
 }
-.btn-outline-danger:focus {
+.btn-color:focus {
     box-shadow: 0 0 0 0rem var(--second-color)
 }
 ::placeholder{
