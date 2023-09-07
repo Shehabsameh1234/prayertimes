@@ -17,12 +17,12 @@ let cardsPrayer = document.querySelectorAll("#prayer-cards div.col-lg-2")
 // global var
 
 // get current time
-function timeNow(){
-    let date = new Date();
-    let formattedTime = date.toLocaleTimeString({ hour12: true });;
-    currentTime.innerHTML = formattedTime
-}
-setInterval(timeNow,1000)
+// function timeNow(){
+//     let date = new Date();
+//     let formattedTime = date.toLocaleTimeString({ hour12: true });;
+//     currentTime.innerHTML = formattedTime
+// }
+// setInterval(timeNow,1000)
 // get current time
 
 // get date of today
@@ -31,8 +31,7 @@ let year = today.getFullYear();
 let month = today.getMonth() + 1;
 let day = today.getDate();
 let todayDate = `${month}-${day}-${year}`
-let Tomorrow = `${month}-${day+1}-${year}`
-
+let Tomorrow = `${month}-${day + 1}-${year}`
 // get date of today
 
 // my request
@@ -90,24 +89,48 @@ async function PrayerTimes(city = "cairo") {
 PrayerTimes()
 // my request
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // click on the button to get the city times name and times
 btn.addEventListener("click", function () {
     if (inputCity.value != "") {
         let city = inputCity.value
         let country = inputCountry.value
-        PrayerTimes(city,country)
+        PrayerTimes(city, country)
+     
+localStorage.setItem("time",inputCity.value)
+      
+      
+
     }
 })
-// click on the button to get the city times name and times
+// click on the button to get the city times name and times  
+
 
 
 // press on enter key to get the city name and times
-document.addEventListener("keypress",function(e){
-   if(e.key==="Enter"){
-    let city = inputCity.value
-    let country = inputCountry.value
-    PrayerTimes(city,country)
-   }
+document.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        let city = inputCity.value
+        let country = inputCountry.value
+        PrayerTimes(city, country)
+
+    }
 })
 // press on enter key to get the city name and times
 
@@ -122,7 +145,7 @@ function setNextPrayer() {
     let minute = second * 60;
     let hour = minute * 60;
     let day = hour * 24;
-    let now = new Date();
+    let now = new Date(localStorage.getItem("dateTimeCity"));
     var distanceFajr = end - now;
     let hours = Math.floor((distanceFajr % day) / hour)
     let mins = Math.floor((distanceFajr % hour) / minute)
@@ -186,7 +209,7 @@ function setNextPrayer() {
         var distanceFajr = end - now;
         let hours = Math.floor((distanceFajr % day) / hour)
         let mins = Math.floor((distanceFajr % hour) / minute)
-       
+
         let seconds = Math.floor((distanceFajr % minute) / second)
         nextPrayerName.innerHTML = "Fajr"
         remainingTime.innerHTML = hours + ":" + mins + ":" + seconds
@@ -196,3 +219,40 @@ function setNextPrayer() {
 }
 setInterval(setNextPrayer, 1000)
 // get the next prayer and remainig time
+
+
+window.onload = window.localStorage.clear();
+
+
+
+      // get time of city
+      function getTime() {
+    
+      let x=localStorage.getItem("time")
+if(x===null){
+    x="cairo"
+
+}
+
+
+        // send the value of input to api
+        var cityTime =x
+        $.ajax({
+            method: 'GET',
+            url: 'https://api.api-ninjas.com/v1/worldtime?city=' + cityTime,
+            headers: { 'X-Api-Key': 'wEIyzcbV3s4n8alqCRr/LA==ofNXbyuxtDmPWokM' },
+            contentType: 'application/json',
+            success: function (result) {
+
+                let date = new Date(result.datetime);
+                localStorage.setItem("dateTimeCity", result.datetime)
+                let formattedTime = date.toLocaleTimeString({ hour12: true });;
+                currentTime.innerHTML = formattedTime
+            },
+            error: function ajaxError(jqXHR) {
+                console.error('Error: ', jqXHR.responseText);
+            }
+        });
+    }
+    setInterval(getTime, 1000)
+    // get time of city
